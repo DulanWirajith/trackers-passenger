@@ -6,16 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/back">
 
-    <FrameLayout
-        android:id="@+id/container01"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -24,7 +17,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="635dp">
+            android:layout_height="match_parent">
 
 
             <Button
@@ -81,13 +74,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.812"
-                />
+                app:layout_constraintVertical_bias="0.812" />
 
             <TextView
                 android:id="@+id/signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:onClick="register"
                 android:text="Sign Up"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"
@@ -95,15 +89,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.848"
-                android:clickable="true"
-                android:onClick="register"/>
+                app:layout_constraintVertical_bias="0.848" />
 
             <de.hdodenhof.circleimageview.CircleImageView
 
                 android:id="@+id/circleImageView"
-                android:layout_width="180dp"
-                android:layout_height="185dp"
+                android:layout_width="164dp"
+                android:layout_height="160dp"
                 android:layout_gravity="center"
                 android:src="@drawable/profile"
                 app:civ_border_color="#FF000000"
