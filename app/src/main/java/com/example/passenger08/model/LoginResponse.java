@@ -1,8 +1,8 @@
 package com.example.passenger08.model;
 
-public class RegisterResponse {
+public class LoginResponse {
     private String message;
-    private String id;
+    private boolean isUserRight;
 
     public String getMessage() {
         return message;
@@ -12,14 +12,11 @@ public class RegisterResponse {
         this.message = message;
     }
 
-    public String getId() {
-        return id;
+    public boolean isUserRight() {
+        return isUserRight;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserRight(boolean userRight) {
+        isUserRight = userRight;
     }
-
-
-
 }
