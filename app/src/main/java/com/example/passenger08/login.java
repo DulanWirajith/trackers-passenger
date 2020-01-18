@@ -19,13 +19,15 @@ import com.example.passenger08.remote_connection.API;
 import com.example.passenger08.remote_connection.RetrofitClient;
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class login extends AppCompatActivity {
     Button button;
-    TextView textView;
     private EditText email;
     private EditText password;
 
@@ -70,19 +72,20 @@ public class login extends AppCompatActivity {
         isLogginSuccessful.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+
                 if (response.isSuccessful()) {
                     if (response.body().isUserRight()) {
                         Toast.makeText(login.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        String message=jObjError.getString("message");
+                        Toast.makeText(login.this, message, Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(login.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
-                else if (response.code() == 401) {
-                    Toast.makeText(login.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                    System.out.println(response.body().getMessage());
-                }
-
-//                if (response.code() == 401) {
-//                    Toast.makeText(login.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-//                }
             }
 
 

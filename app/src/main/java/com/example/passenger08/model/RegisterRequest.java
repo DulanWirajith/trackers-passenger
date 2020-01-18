@@ -4,9 +4,9 @@ public class RegisterRequest {
     private String first_name;
     private String last_name;
     private String passenger_mail;
-//    private String gender;
+    //    private String gender;
     private String password;
-//    private String birthday;
+    //    private String birthday;
     private String contact_no;
 
     public String getFirst_name() {

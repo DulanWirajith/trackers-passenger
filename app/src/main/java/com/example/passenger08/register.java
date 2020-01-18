@@ -70,14 +70,15 @@ public class register extends AppCompatActivity {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 if (response.isSuccessful()) {
-//                    Toast.makeText(MainActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(register.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
 
                 } else {
+                    Toast.makeText(register.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
 
                 }
 
-                if (response.code() == 500) {
-//                    Toast.makeText(MainActivity.this, String.format("%s", response.message()), Toast.LENGTH_LONG).show();
+                if (response.code() == 401) {
+                    Toast.makeText(register.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
 
                 }
             }
