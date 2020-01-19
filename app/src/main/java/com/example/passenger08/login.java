@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.passenger08.model.BackgroundTask;
 import com.example.passenger08.model.LoginRequest;
 import com.example.passenger08.model.LoginResponse;
 import com.example.passenger08.remote_connection.API;
@@ -20,6 +21,8 @@ import com.example.passenger08.remote_connection.RetrofitClient;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
+
+import java.sql.SQLOutput;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -75,12 +78,21 @@ public class login extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     if (response.body().isUserRight()) {
+                        String passengerID = response.body().getPassengerID();
+                        String passengerFirstName = response.body().getPassengerFirstName();
+                        String passengerSecondName = response.body().getPassengerSecondName();
+                        String passengerMail = response.body().getPassengerMail();
+                        String passengerContact = response.body().getPassengerContact();
+                        boolean passengerIsVertify = response.body().isPassengerIsVirtify();
+
+                        BackgroundTask backgroundTask = BackgroundTask.setBackgroundTask(passengerID, passengerFirstName, passengerSecondName, passengerMail, passengerContact, passengerIsVertify);
+//                        System.out.println("hey!!! "+backgroundTask.getBackgroundTask().getPassengerId());
                         Toast.makeText(login.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        String message=jObjError.getString("message");
+                        String message = jObjError.getString("message");
                         Toast.makeText(login.this, message, Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         Toast.makeText(login.this, e.getMessage(), Toast.LENGTH_LONG).show();
