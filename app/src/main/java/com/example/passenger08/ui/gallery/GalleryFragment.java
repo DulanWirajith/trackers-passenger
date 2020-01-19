@@ -14,11 +14,16 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.passenger08.R;
+import com.example.passenger08.model.BackgroundTask;
 
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
     private Button button;
+    private TextView name;
+    private TextView mail;
+    private TextView tel;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +37,16 @@ public class GalleryFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+
+        name= root.findViewById(R.id.editName);
+        name.setText(BackgroundTask.getPassengerFirstName()+" "+BackgroundTask.getPassengerSecondName());
+        mail = root.findViewById(R.id.editMail);
+        mail.setText(BackgroundTask.getPassengerMail());
+        tel=root.findViewById(R.id.editTel);
+        tel.setText(BackgroundTask.getPassengerContact());
         return root;
     }
+
+
 }
