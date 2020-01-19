@@ -5,7 +5,7 @@ public class LoginResponse {
     private boolean isUserRight;
     private String passengerID;
     private String passengerFirstName;
-    private String passengerSecondName;
+    private String passengerLastName;/*Funtion getters setters tynne 2nd name kiyla*/
     private String passengerMail;
     private String passengerContact;
     private boolean passengerIsVirtify;
@@ -43,11 +43,11 @@ public class LoginResponse {
     }
 
     public String getPassengerSecondName() {
-        return passengerSecondName;
+        return passengerLastName;
     }
 
     public void setPassengerSecondName(String passengerSecondName) {
-        this.passengerSecondName = passengerSecondName;
+        this.passengerLastName = passengerSecondName;
     }
 
     public String getPassengerMail() {

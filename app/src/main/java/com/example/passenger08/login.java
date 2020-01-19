@@ -43,7 +43,7 @@ public class login extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNewActivity();
+                loginUser();
             }
         });
     }
@@ -51,9 +51,9 @@ public class login extends AppCompatActivity {
     private void openNewActivity() {
         Toast.makeText(login.this, "login clicked!!!", Toast.LENGTH_LONG).show();
 
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
-        loginUser();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
 
 
     }
@@ -87,6 +87,9 @@ public class login extends AppCompatActivity {
 
                         BackgroundTask backgroundTask = BackgroundTask.setBackgroundTask(passengerID, passengerFirstName, passengerSecondName, passengerMail, passengerContact, passengerIsVertify);
 //                        System.out.println("hey!!! "+backgroundTask.getBackgroundTask().getPassengerId());
+//                        goto another fragment
+                        openNewActivity();
+
                         Toast.makeText(login.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {

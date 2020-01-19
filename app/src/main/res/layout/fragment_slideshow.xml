@@ -85,7 +85,7 @@
                 app:layout_constraintVertical_bias="0.424" />
 
             <RatingBar
-                android:id="@+id/ratingBar"
+                android:id="@+id/feedBackRatingBarTime"
                 android:layout_width="240dp"
                 android:layout_height="45dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -107,7 +107,7 @@
                 app:layout_constraintVertical_bias="0.577" />
 
             <RatingBar
-                android:id="@+id/ratingBar2"
+                android:id="@+id/feedBackRatingBarDriver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -116,17 +116,7 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView2"
                 app:layout_constraintVertical_bias="0.665" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputEditText">
 
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputEditText"
@@ -139,13 +129,13 @@
                 android:hint="comments"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView2"
-                app:layout_constraintVertical_bias="0.78" />
+                app:layout_constraintVertical_bias="0.796" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/submitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Submit"
@@ -155,6 +145,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.9" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rating"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.82"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.382" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
