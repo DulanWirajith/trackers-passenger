@@ -70,10 +70,10 @@
                 android:textSize="17dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.434"
+                app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.868" />
+                app:layout_constraintVertical_bias="0.867" />
 
             <EditText
                 android:id="@+id/editText6"
@@ -119,8 +119,8 @@
 
             <TextView
                 android:id="@+id/textView12"
-                android:layout_width="143dp"
-                android:layout_height="48dp"
+                android:layout_width="153dp"
+                android:layout_height="55dp"
                 android:text="Trackers"
                 android:textColor="#006358"
                 android:textSize="30sp"
