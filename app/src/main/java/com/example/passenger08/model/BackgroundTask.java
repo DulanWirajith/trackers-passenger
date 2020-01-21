@@ -4,7 +4,6 @@ package com.example.passenger08.model;
 public class BackgroundTask {
     private static BackgroundTask backgroundTask;
     private static String passengerId;
-
     private static String passengerFirstName;
     private static String passengerSecondName;
     private static String passengerMail;
