@@ -1,30 +1,50 @@
 package com.example.passenger08;
 
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class map extends Fragment implements OnMapReadyCallback {
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2;
+    private FusedLocationProviderClient fusedLocationClient = null;
+    static Location mCurrentLocation;
 
     GoogleMap map;
+
     public map() {
         // Required empty public constructor
     }
@@ -34,31 +54,100 @@ public class map extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_map, container, false);
-
-
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
+        check_gps_status();
         return view;
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SupportMapFragment mapFragment=(SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        map=googleMap;
-        LatLng pp=new LatLng(8.352865,80.502446);
+        get_the_last_known_location();
 
-        MarkerOptions option =new MarkerOptions();
-        option.position(pp).title("Mihinthale");
-        map.addMarker(option);
-        map.moveCamera(CameraUpdateFactory.newLatLng(pp));
-        map.animateCamera( CameraUpdateFactory.zoomTo( 16.0f ) );
-
+        if (mCurrentLocation != null) {
+            map = googleMap;
+            double lon = mCurrentLocation.getLongitude();
+            double lat = mCurrentLocation.getLatitude();
+            LatLng pp = new LatLng(lat, lon);
+            System.out.println("huthtooo" + mCurrentLocation);
+            MarkerOptions option = new MarkerOptions();
+            option.position(pp).title("Mihinthale");
+            map.addMarker(option);
+            map.moveCamera(CameraUpdateFactory.newLatLng(pp));
+            map.animateCamera(CameraUpdateFactory.zoomTo(16.0f));
+        }
 
     }
+
+    //    GPS on karalada kiyala balanna
+    public void check_gps_status() {
+        LocationManager service = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+// check if enabled and if not send user to the GSP settings
+        if (!enabled) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+            builder1.setMessage("To use this service you have to enable GPS. Would you like to enable GPS?");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        } else {
+            Toast.makeText(getActivity(), "GPS Provider is Enabled", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void get_the_last_known_location() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+            fusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        mCurrentLocation = location;
+                        System.out.println("loca" + location);
+                    } else {
+                        System.out.println("location is null");
+                    }
+                }
+            });
+        } else {
+            System.out.println("no permission granted");
+//            rewquesting Permissions
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+            System.out.println(MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+
+
+        }
+    }
+
+
 }
