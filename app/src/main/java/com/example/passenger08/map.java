@@ -51,11 +51,13 @@ public class map extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map=googleMap;
-        LatLng pp=new LatLng(11.1521,104.1222);
+        LatLng pp=new LatLng(8.352865,80.502446);
+
         MarkerOptions option =new MarkerOptions();
-        option.position(pp).title("laks");
+        option.position(pp).title("Mihinthale");
         map.addMarker(option);
         map.moveCamera(CameraUpdateFactory.newLatLng(pp));
+        map.animateCamera( CameraUpdateFactory.zoomTo( 16.0f ) );
 
 
     }
