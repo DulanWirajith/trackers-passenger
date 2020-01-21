@@ -36,8 +36,8 @@
 
             <EditText
                 android:id="@+id/loginMail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="302dp"
+                android:layout_height="58dp"
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="textPersonName"
@@ -50,8 +50,8 @@
 
             <EditText
                 android:id="@+id/loginPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="51dp"
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPassword"
