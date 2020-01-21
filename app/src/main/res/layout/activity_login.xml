@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/back">
+    android:layout_height="match_parent">
 
 
 
@@ -13,7 +12,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="45dp">
+        android:layout_margin="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -94,17 +93,17 @@
             <de.hdodenhof.circleimageview.CircleImageView
 
                 android:id="@+id/circleImageView"
-                android:layout_width="164dp"
-                android:layout_height="160dp"
+                android:layout_width="194dp"
+                android:layout_height="186dp"
                 android:layout_gravity="center"
-                android:src="@drawable/profile"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp"
+                android:src="@drawable/bus02"
+                app:civ_border_color="#009688"
+                app:civ_border_width="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.117"
+                app:layout_constraintVertical_bias="0.147"
                 tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
