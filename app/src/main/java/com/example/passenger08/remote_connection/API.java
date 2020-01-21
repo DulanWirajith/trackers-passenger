@@ -2,8 +2,10 @@ package com.example.passenger08.remote_connection;
 
 import com.example.passenger08.model.LoginRequest;
 import com.example.passenger08.model.LoginResponse;
+import com.example.passenger08.model.PassengerReviewRequest;
 import com.example.passenger08.model.RegisterRequest;
 import com.example.passenger08.model.RegisterResponse;
+import com.example.passenger08.model.PassengerReviewResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -16,4 +18,9 @@ public interface API {
 
     @POST("/api/v1.0.0/login")
     Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
+
+    @POST("/api/v1.0.0/savereviews")
+    Call<PassengerReviewResponse> passengerReview(@Body PassengerReviewRequest passengerReviewRequest);
+
+
 }
