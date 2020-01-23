@@ -72,7 +72,7 @@ public class login extends AppCompatActivity {
 
         //        request and get response
         final Call<LoginResponse> isLogginSuccessful = service.loginUser(loginRequest);
-        isLogginSuccessful.enqueue(new Callback<LoginResponse>() {
+        isLogginSuccessful.enqueue(new Callback<LoginResponse>(){
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
