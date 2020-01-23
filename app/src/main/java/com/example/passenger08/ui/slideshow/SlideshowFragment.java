@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -23,6 +24,8 @@ import com.example.passenger08.model.PassengerReviewRequest;
 import com.example.passenger08.model.PassengerReviewResponse;
 import com.example.passenger08.remote_connection.API;
 import com.example.passenger08.remote_connection.RetrofitClient;
+
+import org.json.JSONObject;
 
 import java.sql.SQLOutput;
 import java.text.DateFormat;
@@ -142,11 +145,25 @@ public class SlideshowFragment extends Fragment {
         isReviewSuccessful.enqueue(new Callback<PassengerReviewResponse>() {
             @Override
             public void onResponse(Call<PassengerReviewResponse> call, Response<PassengerReviewResponse> response) {
+//                System.out.println(response.body().getMessage());
 
+                if (response.isSuccessful()) {
+                    Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        String message = jObjError.getString("message");
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<PassengerReviewResponse> call, Throwable t) {
+
 
             }
         });

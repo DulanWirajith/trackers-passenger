@@ -75,7 +75,7 @@ public class map extends Fragment implements OnMapReadyCallback {
             double lon = mCurrentLocation.getLongitude();
             double lat = mCurrentLocation.getLatitude();
             LatLng pp = new LatLng(lat, lon);
-            System.out.println("huthtooo" + mCurrentLocation);
+            System.out.println("test" + mCurrentLocation);
             MarkerOptions option = new MarkerOptions();
             option.position(pp).title("Mihinthale");
             map.addMarker(option);
