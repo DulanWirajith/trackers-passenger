@@ -44,7 +44,7 @@
                 android:layout_width="112dp"
                 android:layout_height="103dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="592dp"
+                android:layout_marginBottom="580dp"
                 android:alpha="1"
                 android:src="@drawable/bus02"
                 app:civ_border_color="#009688"
@@ -67,10 +67,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.675"
+                app:layout_constraintHorizontal_bias="0.743"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.061" />
+                app:layout_constraintVertical_bias="0.073" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -137,7 +137,7 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                style="@android:style/Widget.DeviceDefault.RatingBar.Indicator"
+                style="@style/Widget.AppCompat.RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scrollbarSize="4dp"
@@ -150,7 +150,7 @@
 
             <RatingBar
                 android:id="@+id/ratingBar2"
-                style="@android:style/Widget.Material.Light.RatingBar.Indicator"
+                style="@style/Widget.AppCompat.RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -162,7 +162,7 @@
 
             <RatingBar
                 android:id="@+id/ratingBar3"
-                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
+                style="@style/Widget.AppCompat.RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

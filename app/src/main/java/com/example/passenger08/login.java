@@ -120,9 +120,17 @@ public class login extends AppCompatActivity {
 
     public void register(View view) {
         TextView textView = (TextView) findViewById(R.id.signup);
-//        textView.setText("fuck");
+//        textView.setText("la");
 //        textView.setTextColor(Color.GREEN);
         Intent intent = new Intent(this, register.class);
+        startActivity(intent);
+
+    }
+    public void password_reset(View view) {
+        TextView textView = (TextView) findViewById(R.id.forgot_pw);
+//        textView.setText("la");
+//        textView.setTextColor(Color.GREEN);
+        Intent intent = new Intent(this,password_reset.class);
         startActivity(intent);
 
     }

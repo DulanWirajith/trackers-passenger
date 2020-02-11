@@ -3,6 +3,7 @@ package com.example.passenger08;
 import android.os.Bundle;
 
 import com.example.passenger08.ui.gallery.GalleryFragment;
+import com.example.passenger08.ui.share.ShareFragment;
 import com.example.passenger08.ui.slideshow.SlideshowFragment;
 import com.example.passenger08.ui.tools.ToolsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,15 +40,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final FloatingActionButton fab = findViewById(R.id.fab);
+//        final FloatingActionButton fab = findViewById(R.id.fab);
 //        System.out.println(fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -92,10 +93,16 @@ public class MainActivity extends AppCompatActivity {
                             fragmentManager3.beginTransaction().replace(R.id.mainLayout, toolsFragment).commit();
                             break;
 
+                        case R.id.nav_share:
+                            ShareFragment shareFragment = new ShareFragment();
+                            FragmentManager fragmentManager4 = getSupportFragmentManager();
+                            fragmentManager4.beginTransaction().replace(R.id.mainLayout, shareFragment).commit();
+                            break;
+
 
 
                         default:
-                            fab.show();
+                           // fab.show();
                             break;
 
                     }
