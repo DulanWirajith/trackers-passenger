@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 
@@ -45,6 +48,7 @@ public class map extends Fragment implements OnMapReadyCallback {
     static Location mCurrentLocation;
 
     GoogleMap map;
+
 
     public map() {
         // Required empty public constructor
@@ -71,18 +75,6 @@ public class map extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         get_the_last_known_location();
 
-//        map=googleMap;
-//        LatLng ppp=new LatLng(8.352865,80.502446);
-//        map.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-//        map.getUiSettings().setZoomControlsEnabled(true);
-//
-//        MarkerOptions option1 =new MarkerOptions();
-//        option1.position(ppp).title("Mihinthale")
-//        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//        map.addMarker(option1);
-//        map.moveCamera(CameraUpdateFactory.newLatLng(ppp));
-//        map.animateCamera( CameraUpdateFactory.zoomTo( 16.0f ) );
-
         if (mCurrentLocation != null) {
             map = googleMap;
             double lon = mCurrentLocation.getLongitude();
@@ -99,6 +91,22 @@ public class map extends Fragment implements OnMapReadyCallback {
             map.moveCamera(CameraUpdateFactory.newLatLng(pp));
             map.animateCamera(CameraUpdateFactory.zoomTo(16.0f));
         }
+//marker
+        map=googleMap;
+//        Polyline line = map.addPolyline(new PolylineOptions()
+//                .add(new LatLng(51.5, -0.1), new LatLng(40.7, -74.0))
+//                .width(5)
+//                .color(Color.RED));
+        LatLng ppp=new LatLng(8.352865,80.502446);
+        map.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
+        map.getUiSettings().setZoomControlsEnabled(true);
+
+        MarkerOptions option1 =new MarkerOptions();
+        option1.position(ppp).title("Mihinthale")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        map.addMarker(option1);
+        map.moveCamera(CameraUpdateFactory.newLatLng(ppp));
+        map.animateCamera( CameraUpdateFactory.zoomTo( 16.0f ) );
 
     }
 

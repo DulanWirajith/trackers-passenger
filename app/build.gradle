@@ -54,5 +54,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:15.0.1'
 
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.github.jd-alexander:library:1.1.0'
+
 
 }
