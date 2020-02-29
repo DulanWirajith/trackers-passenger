@@ -1,5 +1,6 @@
 package com.example.passenger08.remote_connection;
 
+import com.example.passenger08.model.GetOneReviewResponse;
 import com.example.passenger08.model.GetReviewRequest;
 import com.example.passenger08.model.GetReviewResponse;
 import com.example.passenger08.model.LoginRequest;
@@ -8,6 +9,8 @@ import com.example.passenger08.model.PassengerReviewRequest;
 import com.example.passenger08.model.RegisterRequest;
 import com.example.passenger08.model.RegisterResponse;
 import com.example.passenger08.model.PassengerReviewResponse;
+import com.example.passenger08.model.Review;
+import com.google.gson.JsonElement;
 
 import java.util.List;
 
@@ -28,12 +31,20 @@ public interface API {
 
     @POST("/api/v1.0.0/savereviews")
     Call<PassengerReviewResponse> passengerReview(@Body PassengerReviewRequest passengerReviewRequest);
+//
+    @GET("/api/v1.0.0/getreview/{passenger_mail}")
+    Call<GetOneReviewResponse> getOnePassengerReview(@Path("passenger_mail") String passengerMail);
 
-//    @GET("/api/v1.0.0/getreview/{passenger_mail}")
-    @POST("/api/v1.0.0/getreview")
+    @GET("/api/v1.0.0/getallreviews/{passenger_mail}")
+    Call<GetReviewResponse> getPassengerReview(@Path("passenger_mail") String passengerMail);
+
+    @GET("/api/v1.0.0/getallreviews/{passenger_mail}")
+    Call<List<Review>> getReview(@Path("passenger_mail") String passengerMail);
+
+
+//    @POST("/api/v1.0.0/getreview")
 //    @HTTP(method = "POST", path = "/api/v1.0.0/getreview", hasBody = true)
-//    Call<GetReviewResponse> getPassengerReview(@Path("passenger_mail") GetReviewRequest getReviewRequest);
-    Call<GetReviewResponse> getPassengerReview(@Body GetReviewRequest getReviewRequest);
 
-
+//    @GET("/api/v1/basic-info/{uid}/{qid}")
+//    Call<GetReviewResponse> getBasicInfo(@Path("uid") String uid,@Path("qid") String qid);
 }

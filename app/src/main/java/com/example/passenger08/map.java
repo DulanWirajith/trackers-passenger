@@ -30,6 +30,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -70,12 +71,28 @@ public class map extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         get_the_last_known_location();
 
+//        map=googleMap;
+//        LatLng ppp=new LatLng(8.352865,80.502446);
+//        map.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
+//        map.getUiSettings().setZoomControlsEnabled(true);
+//
+//        MarkerOptions option1 =new MarkerOptions();
+//        option1.position(ppp).title("Mihinthale")
+//        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//        map.addMarker(option1);
+//        map.moveCamera(CameraUpdateFactory.newLatLng(ppp));
+//        map.animateCamera( CameraUpdateFactory.zoomTo( 16.0f ) );
+
         if (mCurrentLocation != null) {
             map = googleMap;
             double lon = mCurrentLocation.getLongitude();
+            System.out.println(lon);
             double lat = mCurrentLocation.getLatitude();
+            System.out.println(lat);
             LatLng pp = new LatLng(lat, lon);
             System.out.println("test" + mCurrentLocation);
+
+
             MarkerOptions option = new MarkerOptions();
             option.position(pp).title("Mihinthale");
             map.addMarker(option);
@@ -122,7 +139,7 @@ public class map extends Fragment implements OnMapReadyCallback {
 
 
     private void get_the_last_known_location() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
             fusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
@@ -141,7 +158,7 @@ public class map extends Fragment implements OnMapReadyCallback {
             System.out.println("no permission granted");
 //            rewquesting Permissions
             ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
             System.out.println(MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
 
