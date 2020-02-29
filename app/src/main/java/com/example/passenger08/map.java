@@ -33,16 +33,19 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class map extends Fragment implements OnMapReadyCallback {
+public class map extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2;
     private FusedLocationProviderClient fusedLocationClient = null;
     static Location mCurrentLocation;
@@ -90,6 +93,9 @@ public class map extends Fragment implements OnMapReadyCallback {
             map.addMarker(option);
             map.moveCamera(CameraUpdateFactory.newLatLng(pp));
             map.animateCamera(CameraUpdateFactory.zoomTo(16.0f));
+
+
+
         }
 //marker
         map=googleMap;
@@ -101,12 +107,19 @@ public class map extends Fragment implements OnMapReadyCallback {
         map.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
         map.getUiSettings().setZoomControlsEnabled(true);
 
-        MarkerOptions option1 =new MarkerOptions();
-        option1.position(ppp).title("Mihinthale")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        map.addMarker(option1);
+        MarkerOptions mihinthale =new MarkerOptions();
+                mihinthale.position(ppp)
+                .title("Mihinthale")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .snippet("Predicted time: 01245"+"\n"+"Rating:4/5");
+
+
+        map.addMarker(mihinthale);
         map.moveCamera(CameraUpdateFactory.newLatLng(ppp));
         map.animateCamera( CameraUpdateFactory.zoomTo( 16.0f ) );
+
+        //WIndow
+        map.setOnInfoWindowClickListener(this);
 
     }
 
@@ -141,7 +154,7 @@ public class map extends Fragment implements OnMapReadyCallback {
             AlertDialog alert11 = builder1.create();
             alert11.show();
         } else {
-            Toast.makeText(getActivity(), "GPS Provider is Enabled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "GPS Provider is Enabled", LENGTH_SHORT).show();
         }
     }
 
@@ -173,6 +186,15 @@ public class map extends Fragment implements OnMapReadyCallback {
 
         }
     }
+
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        System.out.println("clicked");
+
+    }
+
+
 
 
 }
