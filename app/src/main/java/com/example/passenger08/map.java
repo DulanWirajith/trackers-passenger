@@ -19,12 +19,17 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.passenger08.model.BackgroundTask;
+import com.example.passenger08.model.GetLatestLocationResponse;
+import com.example.passenger08.remote_connection.API;
+import com.example.passenger08.remote_connection.RetrofitClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,6 +44,10 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static android.widget.Toast.LENGTH_SHORT;
 
 
@@ -47,6 +56,7 @@ import static android.widget.Toast.LENGTH_SHORT;
  */
 public class map extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 2;
+    private static final String TAG = "MAP";
     private FusedLocationProviderClient fusedLocationClient = null;
     static Location mCurrentLocation;
 
@@ -75,7 +85,7 @@ public class map extends Fragment implements OnMapReadyCallback, GoogleMap.OnInf
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         get_the_last_known_location();
 
         if (mCurrentLocation != null) {
@@ -95,33 +105,86 @@ public class map extends Fragment implements OnMapReadyCallback, GoogleMap.OnInf
             map.animateCamera(CameraUpdateFactory.zoomTo(16.0f));
 
 
-
         }
 //marker
-        map=googleMap;
+        map = googleMap;
 //        Polyline line = map.addPolyline(new PolylineOptions()
 //                .add(new LatLng(51.5, -0.1), new LatLng(40.7, -74.0))
 //                .width(5)
 //                .color(Color.RED));
-        LatLng ppp=new LatLng(8.352865,80.502446);
+        LatLng ppp = new LatLng(8.352865, 80.502446);
         map.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
         map.getUiSettings().setZoomControlsEnabled(true);
 
-        MarkerOptions mihinthale =new MarkerOptions();
-                mihinthale.position(ppp)
+        MarkerOptions mihinthale = new MarkerOptions();
+        mihinthale.position(ppp)
                 .title("Mihinthale")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                .snippet("Predicted time: 01245"+"\n"+"Rating:4/5");
+                .snippet("Predicted time: 01245" + "\n" + "Rating:4/5");
 
 
         map.addMarker(mihinthale);
         map.moveCamera(CameraUpdateFactory.newLatLng(ppp));
-        map.animateCamera( CameraUpdateFactory.zoomTo( 16.0f ) );
+        map.animateCamera(CameraUpdateFactory.zoomTo(16.0f));
 
         //WIndow
         map.setOnInfoWindowClickListener(this);
 
+
+        //        create API object
+        API service = RetrofitClient.createService(API.class);
+
+
+        //        request and get response
+//        final Call<GetReviewResponse> isgetReviewSuccessful = service.getPassengerReview(BackgroundTask.getPassengerMail());
+//        final Call<List<Review>> isgetReviewSuccessful = service.getReview(BackgroundTask.getPassengerMail());
+        final Call<GetLatestLocationResponse> isgetLocationSuccessful = service.getLatestBusLocation("NP-7788");
+
+        System.out.println("Hiiiii");
+        Log.d(TAG, "onCreateView: ");
+
+
+        isgetLocationSuccessful.enqueue(new Callback<GetLatestLocationResponse>() {
+
+
+            @Override
+            public void onResponse(Call<GetLatestLocationResponse> call, Response<GetLatestLocationResponse> response) {
+                System.out.println(response.body().getLatitude());
+                System.out.println(response.body().getLongitude());
+
+                map = googleMap;
+
+//                GetLatestLocationResponse location1 = new GetLatestLocationResponse();
+//
+//                Double lon = Double.valueOf(location1.getLongitude());
+//                System.out.println(lon);
+//                Double lat = Double.valueOf(location1.getLatitude());
+//                System.out.println(lat);
+
+                double longti = Double.parseDouble(response.body().getLongitude());
+                double latitu = Double.parseDouble(response.body().getLatitude());
+
+                LatLng pp;
+                pp = new LatLng(latitu, longti);
+                System.out.println("test" + mCurrentLocation);
+
+                MarkerOptions option = new MarkerOptions();
+                option.position(pp).title("Anuradhapura")
+                        .alpha(1);
+                map.addMarker(option);
+              //  map.moveCamera(CameraUpdateFactory.newLatLng(pp));
+              //  map.animateCamera(CameraUpdateFactory.zoomTo(16.0f));
+
+
+            }
+
+            @Override
+            public void onFailure(Call<GetLatestLocationResponse> call, Throwable t) {
+                System.out.println("failed");
+            }
+        });
     }
+
 
     //    GPS on karalada kiyala balanna
     public void check_gps_status() {

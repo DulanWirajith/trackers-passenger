@@ -10,7 +10,7 @@ public class RetrofitClient {
     private static Retrofit retrofit2 = null;
 
     private static Retrofit.Builder builder =
-            new Retrofit.Builder().baseUrl("http://192.168.1.103:3000").addConverterFactory(GsonConverterFactory.create());
+            new Retrofit.Builder().baseUrl("http://thetrackers.herokuapp.com").addConverterFactory(GsonConverterFactory.create());
 
     private static Retrofit retrofit = builder.build();
 

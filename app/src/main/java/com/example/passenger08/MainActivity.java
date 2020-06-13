@@ -3,6 +3,7 @@ package com.example.passenger08;
 import android.os.Bundle;
 
 import com.example.passenger08.ui.gallery.GalleryFragment;
+import com.example.passenger08.ui.send.SendFragment;
 import com.example.passenger08.ui.share.ShareFragment;
 import com.example.passenger08.ui.slideshow.SlideshowFragment;
 import com.example.passenger08.ui.tools.ToolsFragment;
@@ -97,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
                             ShareFragment shareFragment = new ShareFragment();
                             FragmentManager fragmentManager4 = getSupportFragmentManager();
                             fragmentManager4.beginTransaction().replace(R.id.mainLayout, shareFragment).commit();
+                            break;
+
+                        case R.id.nav_send:
+                            SendFragment sendFragment = new SendFragment();
+                            FragmentManager fragmentManager5 = getSupportFragmentManager();
+                            fragmentManager5.beginTransaction().replace(R.id.mainLayout,sendFragment).commit();
                             break;
 
 

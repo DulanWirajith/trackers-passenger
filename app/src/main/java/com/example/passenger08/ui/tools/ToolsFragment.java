@@ -36,13 +36,14 @@ public class ToolsFragment extends Fragment {
 
     private static final String TAG = "ToolsFragment";
     private ToolsViewModel toolsViewModel;
+    TextView comment,ratingDriver,ratingTime,ratingCondition;
 //    private String email;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         toolsViewModel =
                 ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_tools, container, false);
+        final View root = inflater.inflate(R.layout.fragment_tools, container, false);
         final TextView textView = root.findViewById(R.id.text_tools);
         toolsViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -69,16 +70,27 @@ public class ToolsFragment extends Fragment {
                 GetReviewResponse all_reviews = response.body();
                 ArrayList<Review> all_reviews_doe_mail=all_reviews.getReviews();
                 for (Review review:all_reviews_doe_mail) {
-                    System.out.println("ID is : "+review.get_id());
-                    System.out.println("Reviws comment : "+review.getPassenger_comment());
-                    System.out.println("Feedback time : "+review.getDriver_arrival_time());
-                    System.out.println("Feedback Condition : "+review.getBus_condition());
-                    System.out.println("Feedback Diesplene : "+review.getDriver_discipline());
+//                    System.out.println("ID is : "+review.get_id());
+//                    System.out.println("Reviws comment : "+review.getPassenger_comment());
+//                    System.out.println("Feedback time : "+review.getDriver_arrival_time());
+//                    System.out.println("Feedback Condition : "+review.getBus_condition());
+//                    System.out.println("Feedback Diesplene : "+review.getDriver_discipline());
+
+                    comment = root.findViewById(R.id.viewComment);
+                    comment.setText(review.getPassenger_comment());
+
+                    ratingCondition = root.findViewById(R.id.ratingCondition);
+                    ratingCondition.setText(review.getBus_condition());
+
+                    ratingDriver = root.findViewById(R.id.ratingDriver);
+                    ratingDriver.setText(review.getDriver_discipline());
+
+                    ratingTime = root.findViewById(R.id.ratingTime);
+                    ratingTime.setText(review.getDriver_arrival_time());
 
                 }
 
-                System.out.println("hey my res is "+response);
-
+//                System.out.println("hey my res is "+response);
 
             }
 

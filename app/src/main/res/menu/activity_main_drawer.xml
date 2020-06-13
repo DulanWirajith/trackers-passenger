@@ -20,6 +20,10 @@
             android:id="@+id/nav_tools"
             android:icon="@drawable/ic_view"
             android:title="View Feedback" />
+<!--        <item-->
+<!--            android:id="@+id/nav_send"-->
+<!--            android:icon="@drawable/ic_menu_send"-->
+<!--            android:title="Comments" />-->
     </group>
 
     <item android:title="Communicate">
@@ -28,10 +32,7 @@
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_improve"
                 android:title="Help us to improve" />
-<!--            <item-->
-<!--                android:id="@+id/nav_send"-->
-<!--                android:icon="@drawable/ic_menu_send"-->
-<!--                android:title="@string/menu_send" />-->
+
         </menu>
     </item>
 
